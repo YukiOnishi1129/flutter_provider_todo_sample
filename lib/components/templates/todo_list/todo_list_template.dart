@@ -38,17 +38,11 @@ class _TodoListTemplateState extends State<TodoListTemplate> {
             ),
           ),
         );
-        // 新規Todoを追加
-        data.todoList.add(createdTodo);
-        // 作成日の降順にソート
-        // _todoList.sort((prev, next) => -prev.createdAt.compareTo(next.createdAt));
-        setState(() {
-          // 配列のコピーを作成
-          // https://www.choge-blog.com/programming/dart%E3%83%AA%E3%82%B9%E3%83%88list%E3%82%92%E3%82%B3%E3%83%94%E3%83%BC%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/
-          // final newTodoList = List.of(_todoList);
-          data.todoList;
-          data.currentLastId = int.parse(createdTodo.id);
-        });
+        data.createTodoList(
+          createTodo: createdTodo,
+          newTodoId: int.parse(createdTodo.id),
+        );
+        // // 新規Todo
       } catch (e) {
         throw Exception(e.toString());
       }
@@ -82,14 +76,7 @@ class _TodoListTemplateState extends State<TodoListTemplate> {
         );
         // 更新画面で更新処理を実施した際に、渡ってきた更新データを元にtodoListを更新
         // Todoの内容を更新
-        setState(() {
-          data.todoList = data.todoList.map((todo) {
-            if (todo.id == updatedTodo.id) {
-              return updatedTodo;
-            }
-            return todo;
-          }).toList();
-        });
+        data.updateTodoList(updateTodo: updatedTodo);
       } catch (e) {
         throw Exception(e.toString());
       }
@@ -99,12 +86,8 @@ class _TodoListTemplateState extends State<TodoListTemplate> {
     * Todo削除処理
     */
     void _handleDeleteTodo({required Todo targetTodo}) {
-      setState(() {
-        // Dartでfilterするときはwhereを使う
-        // https://www.choge-blog.com/programming/dart%E3%83%AA%E3%82%B9%E3%83%88list%E3%81%AB%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BCfilter%E5%87%A6%E7%90%86%E3%82%92%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/
-        data.todoList =
-            data.todoList.where((todo) => todo.id != targetTodo.id).toList();
-      });
+      // 削除処理
+      data.deleteTodo(deleteTodo: targetTodo);
     }
 
     /*
