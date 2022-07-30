@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // Providerで親Widgetにデータを仕掛ける
+      // 参考: https://www.flutter-study.dev/create-app/provider
       home: ChangeNotifierProvider<ProviderDataType>.value(
         value: providerData,
         child: const TodoListScreen(),
