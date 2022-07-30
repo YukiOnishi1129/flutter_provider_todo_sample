@@ -4,7 +4,7 @@ import '../model/todo_model.dart';
 // https://qiita.com/i-tanaka730/items/ee5a58ce9a9d7774feaa
 // https://flutter.keicode.com/dart/singleton.php
 
-final List<Todo> todoList = [
+final List<Todo> initTodoList = [
   Todo(
     '1',
     'Todo111111111111111',
